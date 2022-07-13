@@ -8,18 +8,24 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+
+
 // Connect to database
 const db = mysql.createConnection(
     {
         host: 'localhost',
         // Your MySQL username,
-        user: 'PGCranford',
+        user: 'root',
         // Your MySQL password
         password: 'Coding88!',
         database: 'election'
     },
     console.log('Connected to the election database.')
 );
+
+db.query(`SELECT * FROM candidates`, (err, rows) => {
+    console.log(rows);
+});
 
 // Default response for any other request (Not Found)
 app.use((req, res) => {
